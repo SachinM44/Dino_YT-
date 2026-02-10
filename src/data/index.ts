@@ -1,0 +1,73 @@
+export const rawData = {
+  categories: [
+    {
+      category: {
+        slug: 'social-media-ai',
+        name: 'Social Media AI',
+        iconUrl: 'https://media.samajsaathi.com/icons/learn-ai/04-social-media-ai.png'
+      },
+      contents: [
+        { title: 'AI Motivational Reel Banao Free Mein', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b29/TC9Jbr_MBNoEJm5Mwhc2F.png', slug: '_HL7l_62bUc' },
+        { title: 'Social Media Ke Liye Facts Video Banao', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b28/7hy7WSculPFwQtcVu0BzN.png', slug: 'avZd1bSvqyE' },
+        { title: 'Instagram Ka Naya AI Feature', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b2a/T6DpgH_xrEN15r1f3rqu-.png', slug: 'meVTqNn1P5A' },
+        { title: 'Ab Meta AI Karega Aapki Photo Edit', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b29/Joql9g8WnlzhXj5sDCfN5.png', slug: 'x3LsfGSP-Hk' },
+        { title: 'AI Se Reel Banaye 1 Minute Mein', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b29/F5qaMZqTNvp4Z9KmprqEV.png', slug: 'lfDxSj9xnmI' },
+        { title: 'Instagram AI Character Kaise Banaye', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b28/r_1g2P1AnedS4SSN89vwG.png', slug: 'LX598gRezv4' },
+        { title: 'Trending 3D AI Photo Kaise Banaye', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b28/rKMuPZJCl1S9wIpP-knMt.png', slug: 'BDN_N-mAbkU' },
+        { title: 'Social Media Content Ke Liye Best AI Tools', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b29/M-Gw4R2hoRC29el9zQ-uI.png', slug: 'ogAG6GcmHjQ' },
+        { title: 'AI Tools Se Asani Se Content Creator Bano', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b29/9kGHRX9Gj9OcEJwBuVDt1.png', slug: 'mobK-kGDxWo' },
+        { title: 'AI Ki Madad Se Faceless Videos Banao', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b28/y9MpZDuI2z1kZV_mNA2Qd.png', slug: '6ZqxfloJ3Vk' }
+      ]
+    },
+    {
+      category: {
+        slug: 'ai-income',
+        name: 'AI Income',
+        iconUrl: 'https://media.samajsaathi.com/icons/learn-ai/05-ai-income.png'
+      },
+      contents: [
+        { title: 'Yeh Free AI Tool Se Paise Kamao', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b2e/SK5TdlG5x5Tc-KG29U_Jm.png', slug: 'TpW3QxwADgE' },
+        { title: 'AI Clone Se Paise Kamao', thumbnailUrl: 'https://v3b.fal.media/files/b/0a883ea8/MuPkcktStazw3ImTOJGIm.png', slug: 'Wi9cKN6Fg1E' },
+        { title: 'Pictory AI Se Youtube Side Income Bann Sakta Hai?', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b2f/uOV2zrTv8yrsXW3v5nKX2.png', slug: 'mkGhOo_oB4o' },
+        { title: 'DesiVocal Se Bharpur Paise Kamao', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b2e/MBiZLEvaN7FdmVqUDZcJR.png', slug: 'k-aVj_Geyvc' },
+        { title: 'AI Se WordPress Plugin Banakar Paise Kamao', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b2f/RWn-4G0cCcDogRcsUuZHY.png', slug: 'gUDRMsW3v1U' },
+        { title: 'Quick Money AI Se Kamao', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b2e/owJQOWUFlWuxa7HZuageT.png', slug: 'I93GvazYTuc' },
+        { title: 'AI Hindi Story Se Youtube Pe Paise Kamao', thumbnailUrl: 'https://v3b.fal.media/files/b/0a883f60/F8LDntc6q7xMdyJfjC17W.png', slug: 'ibI3RRJN0Wg' },
+        { title: 'Kya Hum AI Se Active Income Bana Sakta Hai?', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b2e/B7yW2SjAclyMReSqcYSfM.png', slug: 'TPtAAW3LSP4' },
+        { title: 'Fiverr Par AI Se Paise Kamao', thumbnailUrl: 'https://v3b.fal.media/files/b/0a883ea7/LOY5sDu5YgN2GaPpJXg5J.png', slug: 'JrbFF30SHzc' },
+        { title: 'AI Tool Se Side Business Shuru Karo!', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b2e/GuuKXPXsea-n1IM1VW6jt.png', slug: 'VKpgO2FVXa0' }
+      ]
+    },
+    {
+      category: {
+        slug: 'ai-essentials',
+        name: 'AI Essentials',
+        iconUrl: 'https://media.samajsaathi.com/icons/learn-ai/07-ai-essentials.png'
+      },
+      contents: [
+        { title: '50 Lakh Ki AI Course Bilkul Free!', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b39/BhkweJb1D0L7oiuL4XdSo.png', slug: 'DzCWyUCr9LQ' },
+        { title: 'Google Ka AI Course 100% Free', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b3a/3rE_mrJr2af5XMJxEXuV_.png', slug: 'kmHt5BHXYvU' },
+        { title: 'Nvidia Ka Free Generative AI Course', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b3a/oD30ARDLlEDQxinlqQvwZ.png', slug: '_w07HdQxuIw' },
+        { title: 'Data Annotation Projects WFH Ke Liye', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b3a/36455BIBrDfyDFwJBbyzh.png', slug: 'ua-NkDcLneo' },
+        { title: '5 Best Free AI Skills Courses', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b39/U9h2KU6HwQ1BX45INCy0y.png', slug: 'sAz94JQ6v4w' },
+        { title: 'Indian Government Ka AI Course', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b39/zBWHk56rKEmLqmbWXN9N6.png', slug: '5kQdqXsmnBc' },
+        { title: 'Lakhon Kamao Yeh Course Karke', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b39/ZHWjXBXcErWgNiR2fz2na.png', slug: 'IoslCQQ4lcE' },
+        { title: 'Crowdgen Platform Ka AI Training Jobs', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b3a/O9KNgQYUNIXrTjvwZWEmE.png', slug: 'SxtDXU_rM1s' },
+        { title: 'EY Aur Microsoft Ka Free AI Course', thumbnailUrl: 'https://v3b.fal.media/files/b/0a877b3a/o4DNA97xHC1BixuETJS_J.png', slug: 'gcOFJSc-lWs' }
+      ]
+    }
+  ]
+}
+
+export const HLS_STREAMS = [
+  'https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8',
+  'https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8',
+  'https://bitdash-a.akamaihd.net/content/MI201109210084_1/m3u8s/f08e80da-bf1d-4e3d-8899-f0f6155f6efa.m3u8',
+  'https://cph-p2p-msl.akamaized.net/hls/live/2000341/test/master.m3u8',
+  'https://demo.unified-streaming.com/k8s/features/stable/video/tears-of-steel/tears-of-steel.ism/.m3u8',
+  'https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8'
+]
+
+export const MOCK_DURATIONS = [145, 203, 178, 256, 312, 189, 234, 167, 298, 221]
+
+
