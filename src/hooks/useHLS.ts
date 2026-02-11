@@ -1,16 +1,11 @@
 import { useEffect, useRef, type RefObject } from 'react'
 import Hls from 'hls.js'
 
-interface UseHLSReturn {
-  isLoading: boolean
-  error: string | null
-}
-
 export function useHLS(
   videoRef: RefObject<HTMLVideoElement | null>,
   src: string,
   autoPlay: boolean = true
-): UseHLSReturn {
+) {
   const hlsRef = useRef<Hls | null>(null)
 
   useEffect(() => {
@@ -21,46 +16,31 @@ export function useHLS(
 
     if (isHLS) {
       if (Hls.isSupported()) {
-        const hls = new Hls({
-          enableWorker: true,
-          lowLatencyMode: true
-        })
+        const hls = new Hls({ enableWorker: true, lowLatencyMode: true })
         hlsRef.current = hls
         hls.loadSource(src)
         hls.attachMedia(video)
 
         hls.on(Hls.Events.MANIFEST_PARSED, () => {
-          if (autoPlay) {
-            video.play().catch(() => {})
-          }
+          if (autoPlay) video.play().catch(() => {})
         })
 
         hls.on(Hls.Events.ERROR, (_, data) => {
           if (data.fatal) {
-            switch (data.type) {
-              case Hls.ErrorTypes.NETWORK_ERROR:
-                hls.startLoad()
-                break
-              case Hls.ErrorTypes.MEDIA_ERROR:
-                hls.recoverMediaError()
-                break
-              default:
-                hls.destroy()
-                break
-            }
+            if (data.type === Hls.ErrorTypes.NETWORK_ERROR) hls.startLoad()
+            else if (data.type === Hls.ErrorTypes.MEDIA_ERROR) hls.recoverMediaError()
+            else hls.destroy()
           }
         })
       } else if (video.canPlayType('application/vnd.apple.mpegurl')) {
+        // Safari native HLS
         video.src = src
-        if (autoPlay) {
-          video.play().catch(() => {})
-        }
+        if (autoPlay) video.play().catch(() => {})
       }
     } else {
+      // MP4 fallback
       video.src = src
-      if (autoPlay) {
-        video.play().catch(() => {})
-      }
+      if (autoPlay) video.play().catch(() => {})
     }
 
     return () => {
@@ -70,9 +50,4 @@ export function useHLS(
       }
     }
   }, [src, autoPlay, videoRef])
-
-  return {
-    isLoading: false,
-    error: null
-  }
 }

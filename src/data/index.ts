@@ -9,4 +9,4 @@ export const HLS_STREAMS = [
   'https://devstreaming-cdn.apple.com/videos/streaming/examples/img_bipbop_adv_example_fmp4/master.m3u8'
 ]
 
-export const MOCK_DURATIONS = [145, 203, 178, 256, 312, 189, 234, 167, 298, 221]
+export const MOCK_DURATIONS = [632, 845, 718, 956, 1087, 789, 534, 667, 1198, 421]

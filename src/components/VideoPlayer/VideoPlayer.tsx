@@ -24,10 +24,8 @@ export function VideoPlayer() {
 
     useHLS(videoRef, currentVideo?.videoUrl || '', true)
 
-    const { elementRef, handlers } = useDragGesture((offset) => {
-        if (offset > window.innerHeight * 0.3 && mode === 'full') {
-            dispatch({ type: 'SET_MODE', mode: 'mini' })
-        }
+    const { elementRef, handlers } = useDragGesture(() => {
+        if (mode === 'full') dispatch({ type: 'SET_MODE', mode: 'mini' })
     })
 
     const handlePlayPause = useCallback(() => {

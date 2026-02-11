@@ -1,29 +1,26 @@
 import { useCallback, useRef } from 'react'
 
-interface DragState {
-  startY: number
-  currentY: number
-  isDragging: boolean
-}
-
 export function useDragGesture(
-  onDragEnd: (offset: number, velocity: number) => void,
+  onDragEnd: (offset: number) => void,
   threshold: number = 0.4
 ) {
-  const stateRef = useRef<DragState>({ startY: 0, currentY: 0, isDragging: false })
-  const startTimeRef = useRef<number>(0)
+  const startY = useRef(0)
+  const currentY = useRef(0)
+  const isDragging = useRef(false)
+  const startTime = useRef(0)
   const elementRef = useRef<HTMLDivElement>(null)
 
   const handleStart = useCallback((clientY: number) => {
-    stateRef.current = { startY: clientY, currentY: clientY, isDragging: true }
-    startTimeRef.current = Date.now()
+    startY.current = clientY
+    currentY.current = clientY
+    isDragging.current = true
+    startTime.current = Date.now()
   }, [])
 
   const handleMove = useCallback((clientY: number) => {
-    if (!stateRef.current.isDragging) return
-
-    stateRef.current.currentY = clientY
-    const offset = clientY - stateRef.current.startY
+    if (!isDragging.current) return
+    currentY.current = clientY
+    const offset = clientY - startY.current
 
     if (elementRef.current && offset > 0) {
       elementRef.current.style.transform = `translateY(${offset}px)`
@@ -32,10 +29,10 @@ export function useDragGesture(
   }, [])
 
   const handleEnd = useCallback(() => {
-    if (!stateRef.current.isDragging) return
+    if (!isDragging.current) return
 
-    const offset = stateRef.current.currentY - stateRef.current.startY
-    const duration = Date.now() - startTimeRef.current
+    const offset = currentY.current - startY.current
+    const duration = Date.now() - startTime.current
     const velocity = offset / duration
 
     if (elementRef.current) {
@@ -43,13 +40,12 @@ export function useDragGesture(
       elementRef.current.style.transition = ''
     }
 
-    const viewportHeight = window.innerHeight
-    const shouldMinimize = offset > viewportHeight * threshold || velocity > 0.5
+    isDragging.current = false
 
-    stateRef.current.isDragging = false
-    onDragEnd(offset, velocity)
-
-    return shouldMinimize
+    // trigger minimize if dragged far enough or fast enough
+    if (offset > window.innerHeight * threshold || velocity > 0.5) {
+      onDragEnd(offset)
+    }
   }, [onDragEnd, threshold])
 
   const onTouchStart = useCallback((e: React.TouchEvent) => {
@@ -61,13 +57,13 @@ export function useDragGesture(
   }, [handleMove])
 
   const onTouchEnd = useCallback(() => {
-    return handleEnd()
+    handleEnd()
   }, [handleEnd])
 
   const onMouseDown = useCallback((e: React.MouseEvent) => {
     handleStart(e.clientY)
-    
-    const onMouseMove = (e: MouseEvent) => handleMove(e.clientY)
+
+    const onMouseMove = (ev: MouseEvent) => handleMove(ev.clientY)
     const onMouseUp = () => {
       handleEnd()
       window.removeEventListener('mousemove', onMouseMove)
@@ -80,11 +76,6 @@ export function useDragGesture(
 
   return {
     elementRef,
-    handlers: {
-      onTouchStart,
-      onTouchMove,
-      onTouchEnd,
-      onMouseDown
-    }
+    handlers: { onTouchStart, onTouchMove, onTouchEnd, onMouseDown }
   }
 }

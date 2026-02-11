@@ -1,6 +1,6 @@
 # Dino Ventures Video Player
 
-A mobile-first video player application with YouTube-like UX, built for the Dino Ventures Frontend Engineer assignment.
+
 
 ## Features
 
