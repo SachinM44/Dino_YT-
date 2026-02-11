@@ -82,10 +82,14 @@ export function VideoPlayer() {
         if (!document.fullscreenElement) {
             el.requestFullscreen().then(() => {
                 setIsFullscreen(true)
+                const orient = screen.orientation as any
+                if (orient?.lock) orient.lock('landscape').catch(() => { })
             }).catch(() => { })
         } else {
             document.exitFullscreen().then(() => {
                 setIsFullscreen(false)
+                const orient = screen.orientation as any
+                if (orient?.unlock) orient.unlock()
             }).catch(() => { })
         }
     }, [])
