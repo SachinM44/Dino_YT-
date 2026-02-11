@@ -16,7 +16,7 @@
   --spacing-lg: 16px;
   --spacing-xl: 24px;
   --app-bar-height: 56px;
-  --mini-player-height: 64px;
+  --mini-player-height: 72px;
   --transition-fast: 150ms ease;
   --transition-normal: 250ms ease;
   --transition-slow: 350ms ease;
@@ -29,9 +29,6 @@
     --spacing-xl: 32px;
   }
 }
-.app-bar {
-  color: white;
-}
 
 * {
   margin: 0;
@@ -39,7 +36,9 @@
   box-sizing: border-box;
 }
 
-html, body, #root {
+html,
+body,
+#root {
   height: 100%;
   width: 100%;
   overflow: hidden;
@@ -74,6 +73,10 @@ img {
   max-width: 100%;
 }
 
+/* ==========================================
+   APP LAYOUT
+   ========================================== */
+
 .app {
   height: 100%;
   width: 100%;
@@ -82,6 +85,10 @@ img {
   position: relative;
   overflow: hidden;
 }
+
+/* ==========================================
+   APP BAR
+   ========================================== */
 
 .app-bar {
   height: var(--app-bar-height);
@@ -94,6 +101,7 @@ img {
   position: sticky;
   top: 0;
   z-index: 100;
+  color: white;
 }
 
 .app-bar-logo {
@@ -121,14 +129,11 @@ img {
   justify-content: center;
   border-radius: var(--radius-full);
   transition: background var(--transition-fast);
+  color: var(--text-primary);
 }
 
 .app-bar-btn:hover {
   background: var(--bg-surface);
-}
-
-.app-bar-btn {
-  color: var(--text-primary);
 }
 
 .app-bar-btn svg {
@@ -136,6 +141,20 @@ img {
   height: 24px;
   fill: currentColor;
 }
+
+/* Make SVG icon images white */
+.app-bar-icon {
+  filter: brightness(0) invert(1);
+}
+
+.app-bar-btn .app-bar-icon {
+  width: 24px;
+  height: 24px;
+}
+
+/* ==========================================
+   MAIN CONTENT / VIDEO FEED
+   ========================================== */
 
 .main-content {
   flex: 1;
@@ -195,6 +214,10 @@ img {
   }
 }
 
+/* ==========================================
+   VIDEO CARD
+   ========================================== */
+
 .video-card {
   cursor: pointer;
   transition: transform var(--transition-fast);
@@ -217,6 +240,7 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
 }
 
 .video-card-duration {
@@ -263,6 +287,10 @@ img {
   height: 14px;
 }
 
+/* ==========================================
+   VIDEO PLAYER CONTAINER
+   ========================================== */
+
 .video-player-container {
   position: fixed;
   inset: 0;
@@ -271,6 +299,10 @@ img {
   display: flex;
   flex-direction: column;
 }
+
+/* ==========================================
+   MINI PLAYER
+   ========================================== */
 
 .video-player-container.minimized {
   top: auto;
@@ -281,14 +313,6 @@ img {
   border-top: 1px solid var(--bg-surface);
 }
 
-.video-wrapper {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: #000;
-  flex-shrink: 0;
-}
-
 .minimized .video-wrapper {
   width: 120px;
   height: 100%;
@@ -297,11 +321,59 @@ img {
   overflow: hidden;
 }
 
+.mini-player-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: hidden;
+}
+
+.mini-player-title {
+  font-size: 13px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.mini-player-controls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-xs);
+}
+
+.mini-player-controls .control-btn {
+  width: 40px;
+  height: 40px;
+}
+
+.mini-player-controls .control-btn svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* ==========================================
+   VIDEO WRAPPER & VIDEO ELEMENT
+   ========================================== */
+
+.video-wrapper {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  background: #000;
+  flex-shrink: 0;
+}
+
 .video-wrapper video {
   width: 100%;
   height: 100%;
   object-fit: contain;
 }
+
+/* ==========================================
+   VIDEO CONTROLS OVERLAY
+   ========================================== */
 
 .video-controls {
   position: absolute;
@@ -309,13 +381,11 @@ img {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  background: linear-gradient(
-    to bottom,
-    rgba(0, 0, 0, 0.7) 0%,
-    transparent 30%,
-    transparent 70%,
-    rgba(0, 0, 0, 0.7) 100%
-  );
+  background: linear-gradient(to bottom,
+      rgba(0, 0, 0, 0.7) 0%,
+      transparent 30%,
+      transparent 70%,
+      rgba(0, 0, 0, 0.7) 100%);
   opacity: 0;
   transition: opacity var(--transition-normal);
   padding: var(--spacing-md);
@@ -368,6 +438,7 @@ img {
   justify-content: center;
   border-radius: var(--radius-full);
   transition: transform var(--transition-fast), background var(--transition-fast);
+  color: var(--text-primary);
 }
 
 .control-btn:hover {
@@ -376,10 +447,6 @@ img {
 
 .control-btn:active {
   transform: scale(0.9);
-}
-
-.control-btn {
-  color: var(--text-primary);
 }
 
 .control-btn svg {
@@ -409,6 +476,10 @@ img {
   flex-direction: column;
   gap: var(--spacing-sm);
 }
+
+/* ==========================================
+   PROGRESS BAR
+   ========================================== */
 
 .progress-container {
   width: 100%;
@@ -465,37 +536,9 @@ img {
   color: var(--text-primary);
 }
 
-.mini-player-info {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  overflow: hidden;
-}
-
-.mini-player-title {
-  font-size: 13px;
-  font-weight: 500;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.mini-player-controls {
-  display: flex;
-  align-items: center;
-  gap: var(--spacing-xs);
-}
-
-.mini-player-controls .control-btn {
-  width: 40px;
-  height: 40px;
-}
-
-.mini-player-controls .control-btn svg {
-  width: 20px;
-  height: 20px;
-}
+/* ==========================================
+   RELATED VIDEOS PANEL
+   ========================================== */
 
 .related-videos-panel {
   flex: 1;
@@ -545,6 +588,7 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  object-position: center top;
 }
 
 .related-video-duration {
@@ -578,6 +622,10 @@ img {
   font-size: 12px;
   color: var(--text-secondary);
 }
+
+/* ==========================================
+   AUTOPLAY OVERLAY
+   ========================================== */
 
 .autoplay-overlay {
   position: absolute;
@@ -613,6 +661,10 @@ img {
   background: var(--bg-surface);
 }
 
+/* ==========================================
+   SKIP ANIMATION
+   ========================================== */
+
 .skip-animation {
   position: absolute;
   top: 50%;
@@ -626,6 +678,7 @@ img {
   background: rgba(0, 0, 0, 0.5);
   animation: skipFade 0.5s ease-out forwards;
   pointer-events: none;
+  color: var(--text-primary);
 }
 
 .skip-animation.left {
@@ -634,10 +687,6 @@ img {
 
 .skip-animation.right {
   right: 20%;
-}
-
-.skip-animation {
-  color: var(--text-primary);
 }
 
 .skip-animation svg {
@@ -651,11 +700,16 @@ img {
     opacity: 1;
     transform: translateY(-50%) scale(1);
   }
+
   100% {
     opacity: 0;
     transform: translateY(-50%) scale(1.5);
   }
 }
+
+/* ==========================================
+   LOADING SPINNER
+   ========================================== */
 
 .loading-spinner {
   width: 48px;
@@ -671,6 +725,10 @@ img {
     transform: rotate(360deg);
   }
 }
+
+/* ==========================================
+   DRAG HANDLE
+   ========================================== */
 
 .drag-handle {
   position: absolute;
@@ -697,18 +755,36 @@ img {
   cursor: grabbing;
 }
 
+/* ==========================================
+   FULLSCREEN: hide related videos
+   ========================================== */
+
+.video-player-container.fullscreen-mode .related-videos-panel {
+  display: none;
+}
+
+.video-player-container.fullscreen-mode .video-wrapper {
+  width: 100% !important;
+  height: 100% !important;
+  aspect-ratio: auto;
+}
+
+/* ==========================================
+   DESKTOP LAYOUT (side-by-side)
+   ========================================== */
+
 @media (min-width: 768px) {
-  .video-player-container:not(.minimized) {
+  .video-player-container:not(.minimized):not(.fullscreen-mode) {
     flex-direction: row;
   }
 
-  .video-player-container:not(.minimized) .video-wrapper {
+  .video-player-container:not(.minimized):not(.fullscreen-mode) .video-wrapper {
     width: 70%;
     aspect-ratio: auto;
     height: 100%;
   }
 
-  .video-player-container:not(.minimized) .related-videos-panel {
+  .video-player-container:not(.minimized):not(.fullscreen-mode) .related-videos-panel {
     width: 30%;
     border-left: 1px solid var(--bg-surface);
   }

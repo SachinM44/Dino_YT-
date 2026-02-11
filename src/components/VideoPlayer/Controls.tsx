@@ -13,6 +13,8 @@ interface ControlsProps {
     onSkip: (seconds: number) => void
     onClose: () => void
     onMinimize: () => void
+    onFullscreenToggle: () => void
+    isFullscreen: boolean
     title: string
     showControls: boolean
     isEnded: boolean
@@ -29,6 +31,8 @@ export function Controls({
     onSkip,
     onClose,
     onMinimize,
+    onFullscreenToggle,
+    isFullscreen,
     title,
     showControls,
     isEnded
@@ -40,14 +44,6 @@ export function Controls({
         onSkip(seconds)
         setTimeout(() => setSkipAnimation(null), 500)
     }
-
-    const toggleFullscreen = useCallback(() => {
-        if (!document.fullscreenElement) {
-            document.documentElement.requestFullscreen()
-        } else {
-            document.exitFullscreen()
-        }
-    }, [])
 
     const togglePiP = useCallback(async () => {
         const video = videoRef.current
@@ -79,9 +75,13 @@ export function Controls({
                             <path d="M19 7h-8v6h8V7zm2-4H3c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h18c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H3V5h18v14z" />
                         </svg>
                     </button>
-                    <button className="control-btn" onClick={toggleFullscreen} aria-label="Fullscreen">
+                    <button className="control-btn" onClick={onFullscreenToggle} aria-label="Fullscreen">
                         <svg viewBox="0 0 24 24">
-                            <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
+                            {isFullscreen ? (
+                                <path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z" />
+                            ) : (
+                                <path d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z" />
+                            )}
                         </svg>
                     </button>
                     <button className="control-btn" onClick={onClose} aria-label="Close">

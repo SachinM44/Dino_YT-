@@ -2,6 +2,8 @@ export interface Video {
   id: string
   title: string
   thumbnailUrl: string
+  mediaUrl: string
+  mediaType: string
   videoUrl: string
   duration: number
   categorySlug: string

@@ -15,10 +15,12 @@ export function VideoPlayer() {
     const [buffered, setBuffered] = useState(0)
     const [showControls, setShowControls] = useState(true)
     const [isEnded, setIsEnded] = useState(false)
+    const [isFullscreen, setIsFullscreen] = useState(false)
     const [autoplayCountdown, setAutoplayCountdown] = useState<number | null>(null)
 
     const controlsTimeoutRef = useRef<number | null>(null)
     const countdownRef = useRef<number | null>(null)
+    const containerRef = useRef<HTMLDivElement>(null)
 
     useHLS(videoRef, currentVideo?.videoUrl || '', true)
 
@@ -64,12 +66,31 @@ export function VideoPlayer() {
     }, [videoRef, dispatch])
 
     const handleMinimize = useCallback(() => {
+        // Exit fullscreen first if in fullscreen
+        if (document.fullscreenElement) {
+            document.exitFullscreen()
+        }
         dispatch({ type: 'SET_MODE', mode: 'mini' })
     }, [dispatch])
 
     const handleExpand = useCallback(() => {
         dispatch({ type: 'SET_MODE', mode: 'full' })
     }, [dispatch])
+
+    const handleFullscreenToggle = useCallback(() => {
+        const el = containerRef.current
+        if (!el) return
+
+        if (!document.fullscreenElement) {
+            el.requestFullscreen().then(() => {
+                setIsFullscreen(true)
+            }).catch(() => { })
+        } else {
+            document.exitFullscreen().then(() => {
+                setIsFullscreen(false)
+            }).catch(() => { })
+        }
+    }, [])
 
     const cancelAutoplay = useCallback(() => {
         setAutoplayCountdown(null)
@@ -90,6 +111,15 @@ export function VideoPlayer() {
             }
         }, 3000)
     }, [isPlaying, isEnded])
+
+    // Listen for fullscreen changes (e.g. user presses Escape)
+    useEffect(() => {
+        const handleFullscreenChange = () => {
+            setIsFullscreen(!!document.fullscreenElement)
+        }
+        document.addEventListener('fullscreenchange', handleFullscreenChange)
+        return () => document.removeEventListener('fullscreenchange', handleFullscreenChange)
+    }, [])
 
     useEffect(() => {
         const video = videoRef.current
@@ -191,8 +221,11 @@ export function VideoPlayer() {
 
     return (
         <div
-            ref={elementRef}
-            className="video-player-container"
+            ref={(el) => {
+                (containerRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+                (elementRef as React.MutableRefObject<HTMLDivElement | null>).current = el;
+            }}
+            className={`video-player-container ${isFullscreen ? 'fullscreen-mode' : ''}`}
             onClick={showControlsTemporarily}
             onMouseMove={showControlsTemporarily}
             onTouchStart={showControlsTemporarily}
@@ -211,6 +244,8 @@ export function VideoPlayer() {
                     onSkip={handleSkip}
                     onClose={handleClose}
                     onMinimize={handleMinimize}
+                    onFullscreenToggle={handleFullscreenToggle}
+                    isFullscreen={isFullscreen}
                     title={currentVideo.title}
                     showControls={showControls}
                     isEnded={isEnded}

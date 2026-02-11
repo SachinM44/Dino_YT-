@@ -1,7 +1,6 @@
 import { HLS_STREAMS, MOCK_DURATIONS, rawData } from '.'
 import type { Video, Category } from '../types'
 
-
 let videoIndex = 0
 
 export const categories: Category[] = rawData.categories.map(cat => ({
@@ -13,6 +12,8 @@ export const categories: Category[] = rawData.categories.map(cat => ({
       id: content.slug,
       title: content.title,
       thumbnailUrl: content.thumbnailUrl,
+      mediaUrl: content.mediaUrl,
+      mediaType: content.mediaType,
       videoUrl: HLS_STREAMS[videoIndex % HLS_STREAMS.length],
       duration: MOCK_DURATIONS[videoIndex % MOCK_DURATIONS.length],
       categorySlug: cat.category.slug,
